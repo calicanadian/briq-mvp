@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  record_index: MyString
+  date_open: MyString
+  record_status: MyString
+  record_location: MyString
+  record_type: MyString
+  description: MyText
+  planner: MyString
+  module: MyString
+  city: MyString
+  state: MyString
+  zip_code: 1
+
+two:
+  record_index: MyString
+  date_open: MyString
+  record_status: MyString
+  record_location: MyString
+  record_type: MyString
+  description: MyText
+  planner: MyString
+  module: MyString
+  city: MyString
+  state: MyString
+  zip_code: 1
