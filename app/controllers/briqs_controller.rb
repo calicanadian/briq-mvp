@@ -1,5 +1,6 @@
 class BriqsController < ApplicationController
   before_action :get_briq, only: [:show, :edit, :update, :destroy]
+  before_action :set_s3_direct_post, only: [:show]
   # GET /briqs || /
   def index
     @briqs = Briq.all
@@ -7,7 +8,7 @@ class BriqsController < ApplicationController
 
   # GET /briqs/:id
   def show
-    @briq_records = BriqRecord.get_construction_records(@briq.id)
+    @briq_records = JSON.parse(BriqRecord.get_construction_records(@briq.id).uniq.to_json, object_class: OpenStruct)
   end
 
   # GET /briqs/new
@@ -40,6 +41,7 @@ class BriqsController < ApplicationController
   # DELETE /briqs/:id
   def destroy
     @briq.destroy
+    redirect_to briqs_path
   end
 
   private

@@ -12,4 +12,44 @@
     %strong Updated:
     = @briq.updated_at.strftime('%m/%d/%Y')
 
-= link_to "Import Records", import_new_briq_records_path(@briq)
+  %p
+    = link_to "Destroy Briq", briq_path(), method: :delete
+
+
+
+- unless @briq_records.blank?
+  %table
+    %thead
+      %tr
+        %td ID
+        %td Record Index
+        %td Date Open
+        %td Record Status
+        %td Record Location
+        %td Record Type
+        %td Description
+        %td Planner
+        %td Module
+        %td City
+        %td State
+        %td Zip Code
+    %tbody
+      - @briq_records.each do |record|
+        %tr
+          %td= record.id unless record.id.blank?
+          %td= record.record_index unless record.record_index.blank?
+          %td= record.date_open unless record.date_open.blank?
+          %td= record.record_status unless record.record_status.blank?
+          %td= record.record_location unless record.record_location.blank?
+          %td= record.record_type unless record.record_type.blank?
+          %td= record.description unless record.description.blank?
+          %td= record.planner unless record.planner.blank?
+          %td= record.record_module unless record.record_module.blank?
+          %td= record.city unless record.city.blank?
+          %td= record.state unless record.state.blank?
+          %td= record.zip_code unless record.zip_code.blank?
+- else
+  -# = link_to "Import Records", import_new_briq_records_path(@briq)
+  = form_for import_briq_records_path(briq_id: @briq.id), url: {controller: 'records', action: 'import', briq_id: @briq.id}, html: { class: 'directUpload', data: { form_data: (@s3_direct_post.fields), url: @s3_direct_post.url, host: URI.parse(@s3_direct_post.url).host, callback_url: import_briq_records_path(briq_id: @briq.id) } } do |f|
+    %div= f.label "Import Council Minutes"
+    %div= f.file_field :file, class: 'form-field', accepted: 'xls, xlsx', name: 'file'
