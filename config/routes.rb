@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
-  root 'records#index'
-  resources :records
+  root 'briqs#index'
+
+  resources :briqs do
+    resources :records, only: [:index, :show, :destroy] do
+      collection do
+        get :import_new
+        post :import
+      end
+    end
+  end
 end

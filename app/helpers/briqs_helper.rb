@@ -1,0 +1,2 @@
+module BriqsHelper
+end

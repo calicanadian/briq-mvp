@@ -1,25 +1,30 @@
 class RecordsController < ApplicationController
   before_action :get_record, only: [:show, :edit, :destroy]
+  before_action :set_s3_direct_post, only: [:import_new, :import]
+  before_action :get_briq, only: [:import]
 
   def index
     @records = Record.all
-    render json: { records: @records }, status: 200
   end
 
   def show
-    render json: { record: @record }, status: 200
+
   end
 
-  def new
-    render json: { }, status: 200
+  def import_new
+
   end
 
-  def create
-    @record = Record.new(record_params)
-    if @record.save!
-      render json: { record: @record }, status: 201
-    else
-      render json: { errors: @record.errors }, status: 422
+  def import
+    o_lo "in import"
+    begin
+      fileUrl = params[:fileUrl]
+      Delayed::Job.enqueue Records::SortRecords.new(fileUrl, @briq)
+      render json: { redirect_url: briq_path(@briq) }
+      # send the file to a background job for processing
+    rescue Exception => e
+      o_lo e.inspect
+      # do something
     end
   end
 
@@ -33,8 +38,16 @@ class RecordsController < ApplicationController
 
   private
 
+  def set_s3_direct_post
+    @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+  end
+
   def get_record
     @record = Record.find(params[:id])
+  end
+
+  def get_briq
+    @briq = Briq.find(params[:briq_id])
   end
 
   def record_params

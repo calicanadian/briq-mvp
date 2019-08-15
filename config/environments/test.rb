@@ -22,6 +22,10 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+
+  # Custom directories to be autoloadable
+  config.autoload_paths += %W(#{config.root}/lib)
+
   # Raise exceptions instead of rendering exception templates.
   config.action_dispatch.show_exceptions = false
 

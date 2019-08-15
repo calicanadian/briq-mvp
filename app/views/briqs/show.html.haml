@@ -1,0 +1,15 @@
+- unless @briq.blank?
+  %p
+    %strong Name:
+    = @briq.name
+  %p
+    %strong Description:
+    = @briq.description
+  %p
+    %strong Created:
+    = @briq.created_at.strftime('%m/%d/%Y')
+  %p
+    %strong Updated:
+    = @briq.updated_at.strftime('%m/%d/%Y')
+
+= link_to "Import Records", import_new_briq_records_path(@briq)

@@ -1,0 +1,4 @@
+= form_for import_briq_records_path, url: {controller: 'records', action: 'import'}, html: { class: 'directUpload', data: { form_data: (@s3_direct_post.fields), url: @s3_direct_post.url, host: URI.parse(@s3_direct_post.url).host, callback_url: import_briq_records_path } } do |f|
+  %div= f.label "Import Council Minutes"
+  %div= f.file_field :file, class: 'form-field', accepted: 'xls, xlsx', name: 'file'
+  %div= f.submit "Submit", class: "button", id: "submit-record-import"

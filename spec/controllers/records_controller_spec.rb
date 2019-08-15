@@ -18,17 +18,12 @@ RSpec.describe RecordsController, type: :controller do
     end
   end
 
-  describe '#new' do
-    subject { get :new }
+  describe '#import_new' do
+    subject { get :import_new }
 
     it 'should return success status' do
+      subject
       expect(response).to have_http_status(:ok)
-    end
-  end
-
-  describe '#create' do
-    it 'should return created status' do
-      expect(response).to have_http_status(200)
     end
   end
 

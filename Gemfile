@@ -6,7 +6,7 @@ ruby '2.6.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -21,7 +21,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'awesome_print'
-gem 'aws-sdk-s3', '~> 1'
+gem 'aws-sdk'
 gem 'carrierwave'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
@@ -50,7 +50,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'pg'
 end
 
 group :test do
@@ -62,7 +61,7 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

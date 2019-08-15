@@ -1,0 +1,16 @@
+- unless @records.blank?
+  - @records.each do |record|
+    = record.record_index
+    = record.date_open
+    = record.record_status
+    = record.record_location
+    = record.record_type
+    = record.description
+    = record.planner
+    = record.record_module
+    = record.city
+    = record.state
+    = record.zip_code
+- else
+  No records to be displayed.
+  = link_to "Import New", import_new_records_path, class: "button"

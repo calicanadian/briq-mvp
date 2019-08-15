@@ -1,0 +1,25 @@
+= link_to "Create new Briq", new_briq_path, class: "button"
+- unless @briqs.blank?
+  %table.table
+    %thead
+      %tr
+        %td Name
+        %td Description
+        %td Created
+    %tbody
+      - @briqs.each do |briq|
+        %tr
+          %td= briq.name unless briq.name.blank?
+          %td= briq.description unless briq.description.blank?
+          %td= briq.created_at.strftime('%m/%d/%Y') unless briq.name.blank?
+- else
+  %table.table
+    %thead
+      %tr
+        %td Name
+        %td Description
+        %td Created
+    %tbody
+      %tr
+        %td{colspan: '3'}
+          %p No briqs here!
