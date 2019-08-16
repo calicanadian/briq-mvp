@@ -16,7 +16,6 @@ class RecordsController < ApplicationController
   end
 
   def import
-    o_lo "in import"
     begin
       fileUrl = params[:fileUrl]
       Delayed::Job.enqueue Records::SortRecords.new(fileUrl, @briq)

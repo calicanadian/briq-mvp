@@ -6,5 +6,4 @@ App.briq_imports = App.cable.subscriptions.create "BriqImportsChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    console.dir(data)
     $('#results').append data.record
