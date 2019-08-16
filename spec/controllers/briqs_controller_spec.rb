@@ -30,7 +30,7 @@ RSpec.describe BriqsController, type: :controller do
     subject { post :create, params: { briq: { name: "Test String", description: "Test Description" } } }
     it 'should return success status' do
       subject
-      expect(response).to have_http_status(204)
+      expect(response).to have_http_status(302)
     end
   end
 
@@ -46,7 +46,7 @@ RSpec.describe BriqsController, type: :controller do
     subject { delete :destroy, params: { id: briq.id } }
     it 'should return success status' do
       subject
-      expect(response).to have_http_status(204)
+      expect(response).to have_http_status(302)
     end
   end
 end

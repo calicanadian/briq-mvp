@@ -30,9 +30,9 @@ class RecordsController < ApplicationController
 
   def destroy
     if @record.destroy
-      redirect_to records_path, notice: 'record destroyed'
+      redirect_to briq_records_path, notice: 'record destroyed'
     else
-      redirect_to record_path(@record), notice: 'unable to destroy'
+      redirect_to briq_record_path(@record), notice: 'unable to destroy'
     end
   end
 
