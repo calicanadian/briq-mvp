@@ -27,6 +27,13 @@ module Records
 
     end
 
+    def record_render(record)
+      ApplicationController.renderer.render(
+        partial: 'records/record',
+        locals: { record: record }
+      )
+    end
+
     def perform
       # do some file read stuff here.
       file = Roo::Spreadsheet.open(URI.encode(file_url))
@@ -50,6 +57,9 @@ module Records
           is_construction = record.description.blank? ? false : record.description.scan(/commercial|retail|high-rise/i).count > 0
           briq_record = BriqRecord.new(record_id: record.id, briq_id: briq.id, is_construction: is_construction)
           briq_record.save!
+          if briq_record.is_construction
+            ActionCable.server.broadcast "briq_imports_channel", record: record_render(record)
+          end
         end
       end
     end
